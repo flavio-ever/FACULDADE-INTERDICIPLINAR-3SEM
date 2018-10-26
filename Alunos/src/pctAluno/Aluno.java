@@ -1,16 +1,12 @@
-
-package pctAluno;
-
 import java.util.*;
 
 public class Aluno {
     /**
     *	Atributes
     **/
-    private String          rgmAluno, 
-                            nomeAluno, 
-                            cursoAluno; 
-
+    private String          rgmAluno,
+                            nomeAluno,
+                            cursoAluno;
     private int             idadeAluno;
     private List<Integer>   mediaAluno; 
     /**
@@ -81,12 +77,14 @@ public class Aluno {
         return this;
     }
     public void SearchAluno(List<Aluno> obj2, 
+                            String rgm,
                             String curso,
                             int idade){
         for (Aluno obj : obj2) {
             Aluno ln = (Aluno)obj;
             if(((curso == "")   || (curso == ln.cursoAluno))|| 
-               ((idade == 0)    || (idade == ln.idadeAluno)))
+               ((rgm == "")     || (rgm == ln.rgmAluno))|| 
+               (idade == ln.idadeAluno))
                     getDetailAluno(ln);
         }
     }
