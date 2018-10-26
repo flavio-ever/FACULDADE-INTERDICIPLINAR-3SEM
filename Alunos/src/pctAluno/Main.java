@@ -1,4 +1,3 @@
-package pctAluno;
 import java.util.*;
 
 class Main {
@@ -14,7 +13,22 @@ class Main {
 
                     
     Scanner read = new Scanner(System.in);
-    boolean miniDash = true;
+
+    objAluno.add(new Aluno("1863036-7", 
+                           "Flavio Everton", 
+                           22, 
+                           "ADS", 
+                           notasAluno));
+
+    objAluno.add(new Aluno("6666666-7", 
+                           "Kalita Trevisan", 
+                           23, 
+                           "XS", 
+                           notasAluno));
+
+    __default.SearchAluno(objAluno, "1863036-7", null, 0);
+
+    boolean miniDash = false;
     while(miniDash){
         int opSelected;
         System.out.println("********************************************************************\n" + 
@@ -39,7 +53,7 @@ class Main {
             case 2:
                 __default.Clear();
                 System.out.print("Digite o RGM do aluno:. ");
-                __default.SearchAluno(objAluno, read.next(), 0);
+                __default.SearchAluno(objAluno, read.next(), null, 0);
                 break;
             case 3:
                 
@@ -57,31 +71,5 @@ class Main {
                 miniDash = false;
         }
     }        
-//     objAluno.add(new Aluno("1863036-7", 
-//                            "Flavio Everton", 
-//                            22, 
-//                            "ADS", 
-//                            notasAluno));
-//
-//     objAluno.add(new Aluno("6666666-7", 
-//                            "Kalita Trevisan", 
-//                            23, 
-//                            "XS", 
-//                            notasAluno));
-
-    //  Aluno x = teste.SearchAluno(objAluno, "1863036-7", "");
-    //  System.out.println(x.getNomeAluno());
-    // x.setNomeAluno("Puta");
-
-    // Aluno z = teste.SearchAluno(objAluno, "1863036-7", "");
-    // 			z.editAluno();
-    // 			System.out.println(x.getNomeAluno());
-    // 			System.out.println(z.getNomeAluno());
-
-//    teste.SearchAluno(objAluno, null, 22);
-
-
-    
   }
 }
-
