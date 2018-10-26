@@ -1,4 +1,4 @@
-#Cadastro de alunos
+# Cadastro de alunos
 
 Informações presentes no cadastro: rgm, nome do aluno, curso, semestre, idade e média final.
 a) Opção para inserir aluno
