@@ -7,12 +7,12 @@ public class Aluno {
     /**
     *	Atributes
     **/
-    private String 	rgmAluno, 
-                                                                    nomeAluno, 
-                                                                    cursoAluno; 
+    private String          rgmAluno, 
+                            nomeAluno, 
+                            cursoAluno; 
 
-    private int 		idadeAluno;
-    private List<Integer> 	mediaAluno; 
+    private int             idadeAluno;
+    private List<Integer>   mediaAluno; 
     /**
     * Methods Getters & Setters
     **/
