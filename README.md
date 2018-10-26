@@ -1,6 +1,6 @@
 #Cadastro de alunos
-Informações presentes no cadastro: rgm, nome do aluno, curso, semestre, idade e média
-final.
+
+Informações presentes no cadastro: rgm, nome do aluno, curso, semestre, idade e média final.
 a) Opção para inserir aluno
 b) Opção para alterar todos os dados pelo RGM
 c) Opção para pesquisar pelo rgm
