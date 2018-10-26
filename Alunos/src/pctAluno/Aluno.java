@@ -74,8 +74,8 @@ public class Aluno {
                             String curso){
         for (Aluno obj : obj2) {
                 Aluno ln = (Aluno)obj;
-                if(	((String)ln.rgmAluno == rgm) || 
-                                ((String)ln.cursoAluno == curso))	
+                if(((String)ln.rgmAluno == rgm) || 
+                   ((String)ln.cursoAluno == curso))	
                                 return ln;
         }
         return this;
@@ -101,11 +101,15 @@ public class Aluno {
                             aln.idadeAluno,
                             aln.cursoAluno,
                             aln.mediaAluno);
-        System.out.println("//----------------------------------------------------//");
+        System.out.println("\n");
     }
-    public void editAluno() {
+    public void editAluno(boolean novo) {
         Scanner rd = new Scanner(System.in);
         List<Integer> notasAluno = new ArrayList<Integer>();
+        if(novo){ 
+            System.out.print("Digite o RGM do Aluno: ");
+            this.rgmAluno = rd.next();
+        }
         System.out.print("Digite o NOME do Aluno: ");
         this.nomeAluno = rd.next();
         System.out.print("Digite o CURSO do Aluno: ");
@@ -123,5 +127,8 @@ public class Aluno {
     }
     public void getFaixaEtariaAluno(){
 
+    }
+    public void Clear(){
+        for(int clear = 0; clear < 1000; clear++){ System.out.println("\b");}
     }
 }
