@@ -72,52 +72,65 @@ public class Aluno {
     }
     /**
     *	Procedures / Methods
-    *   @param obj2 
-    *   @param rgm
-    *   @param curso
+    *   @param  
+    *   @param 
+    *   @param 
     **/
     public Aluno SearchAluno(List<Aluno> obj2, 
                             String rgm, 
                             String tipoPesq){
         Aluno tmpAluno = obj2.get(0); // First Default
+        String _tipoPesq[] = tipoPesq.split(",");
         for (Aluno obj : obj2) {
             Aluno ln = (Aluno)obj;
-            if(ln.rgmAluno == rgm){ tmpAluno = ln; break; }
+            // Rgm
+            if(rgm != null && rgm.equals(ln.rgmAluno)) { tmpAluno = ln; break; }
+            /**
+             * Se houver um curso que não seja null, entrão filtrar...
+             * Se durante o filtro o curso sugerido for igual ao da lista então re-alocar a variavel tmpAluno
+             * Porém, se a variável tpmAluno o curso for igual ao curso sugerido então não re-alocar.
+             */
+            if((_tipoPesq[1].toLowerCase().equals(ln.cursoAluno.toLowerCase())) && 
+               !(_tipoPesq[1].toLowerCase().equals(tmpAluno.cursoAluno.toLowerCase()))){
+                tmpAluno = ln;
+            }
             // Média
-            tmpAluno =  (tipoPesq == "media" && 
+            tmpAluno =  (((tipoPesq != null) && 
+                        _tipoPesq[0].toLowerCase().equals("media") && 
+                        _tipoPesq[1].toLowerCase().equals(ln.cursoAluno.toLowerCase())) && 
                         (ln.getMediaAluno() > tmpAluno.getMediaAluno())) ? ln : tmpAluno;
             // Idade
-            tmpAluno =  (tipoPesq == "idade" && 
+            tmpAluno =  ((tipoPesq != null && _tipoPesq[0].equals("idade")) && 
                         (ln.idadeAluno > tmpAluno.idadeAluno)) ? ln : tmpAluno;
         }
         return tmpAluno;
     }
     public void SearchAluno(List<Aluno> obj2, 
-                            String rgm,
-                            String curso,
+                            String rgmOuCurso,
                             int idade){
         for (Aluno obj : obj2) {
             Aluno ln = (Aluno)obj;
-            if(((curso == "")   || (curso == ln.cursoAluno))|| 
-               ((rgm == "")     || (rgm == ln.rgmAluno))|| 
-               (idade == ln.idadeAluno))
-                    getDetailAluno(ln);
+            if( (rgmOuCurso != null && rgmOuCurso.equals(ln.rgmAluno)) || 
+                (rgmOuCurso != null && rgmOuCurso.toLowerCase().equals(ln.cursoAluno.toLowerCase())) || 
+                (idade == ln.idadeAluno)){
+                getDetailAluno(ln);
+            }
         }
     }
     public void getDetailAluno(Aluno aln){
-        System.out.format(  "\nRgm do Aluno:. %s" + 
-                            "\nNome do Aluno:. %s" + 
-                            "\nIdade do Aluno:. %s" + 
-                            "\nCurso do Aluno:. %s" + 
-                            "\nSemestre do Aluno:. %s" + 
-                            "\nMédia do Aluno:. %s\n\n",	
+        System.out.println("--------------------------------------------------------------------");
+        System.out.format(  " - Rgm do Aluno:. %s" + 
+                            "\n - Nome do Aluno:. %s" + 
+                            "\n - Idade do Aluno:. %s" + 
+                            "\n - Curso do Aluno:. %s" + 
+                            "\n - Semestre do Aluno:. %s" + 
+                            "\n - Média do Aluno:. %s\n",	
                             aln.rgmAluno, 
                             aln.nomeAluno, 
                             aln.idadeAluno,
                             aln.cursoAluno,
                             aln.semestreAluno,
                             aln.getMediaAluno());
-        System.out.println("\n");
     }
     public void editAluno(boolean novo) {
         Scanner rd = new Scanner(System.in);
