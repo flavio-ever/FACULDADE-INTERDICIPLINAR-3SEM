@@ -1,14 +1,16 @@
-import java.util.*;
+package pctAluno;
 
+import java.util.*;
 public class Aluno {
     /**
     *	Atributes
     **/
     private String          rgmAluno,
                             nomeAluno,
-                            cursoAluno;
+                            cursoAluno,
+                            semestreAluno;
     private int             idadeAluno;
-    private List<Integer>   mediaAluno; 
+    private List<Float>     mediaAluno; 
     /**
     * Methods Getters & Setters
     **/
@@ -21,10 +23,13 @@ public class Aluno {
     public String getCursoAluno(){
         return this.cursoAluno;
     }
+    public String getSemestreAluno(){
+        return this.semestreAluno;
+    }
     public int getIdadeAluno(){
         return this.idadeAluno;
     }
-    public List<Integer> getMediaAluno(){
+    public List<Float> getMediaAluno(){
         return this.mediaAluno;
     }
     public void setRgmAluno(String rgmAluno){
@@ -36,28 +41,31 @@ public class Aluno {
     public void setCursoAluno(String cursoAluno){
         this.cursoAluno = cursoAluno;
     }
+    public void setSemestreAluno(String semestreAluno){
+        this.semestreAluno = semestreAluno;
+    }
     public void setIdadeAluno(int idadeAluno){
         this.idadeAluno = idadeAluno;
     }
-    public void setMediaAluno(List<Integer> mediaAluno){
+    public void setMediaAluno(List<Float> mediaAluno){
         this.mediaAluno = mediaAluno;
     }
     /** 
-    * Constructor
+    * Constructor 
     **/
-    public Aluno(){
-
-    }
+    public Aluno(){ } // Null
     public Aluno(String rgmAluno, 
                 String nomeAluno, 
                 int idadeAluno, 
                 String cursoAluno, 
-                List<Integer> mediaAluno){
-            this.rgmAluno 	= rgmAluno;
-            this.nomeAluno 	= nomeAluno;
-            this.idadeAluno = idadeAluno;
-            this.cursoAluno = cursoAluno;
-            this.mediaAluno = mediaAluno;
+                String semestreAluno, 
+                List<Float> mediaAluno){
+        this.rgmAluno 	= rgmAluno;
+        this.nomeAluno 	= nomeAluno;
+        this.idadeAluno     = idadeAluno;
+        this.cursoAluno     = cursoAluno;
+        this.semestreAluno  = semestreAluno;
+        this.mediaAluno     = mediaAluno;
     }
     /**
     *	Procedures / Methods
@@ -93,17 +101,19 @@ public class Aluno {
                             "\nNome do Aluno:. %s" + 
                             "\nIdade do Aluno:. %s" + 
                             "\nCurso do Aluno:. %s" + 
+                            "\nSemestre do Aluno:. %s" + 
                             "\nMédia do Aluno:. %s\n\n",	
                             aln.rgmAluno, 
                             aln.nomeAluno, 
                             aln.idadeAluno,
                             aln.cursoAluno,
-                            aln.mediaAluno);
+                            aln.semestreAluno,
+                            aln.getFaixaEtariaAluno());
         System.out.println("\n");
     }
     public void editAluno(boolean novo) {
         Scanner rd = new Scanner(System.in);
-        List<Integer> notasAluno = new ArrayList<Integer>();
+        List<Float> notasAluno = new ArrayList<Float>();
         if(novo){ 
             System.out.print("Digite o RGM do Aluno: ");
             this.rgmAluno = rd.next();
@@ -112,19 +122,24 @@ public class Aluno {
         this.nomeAluno = rd.next();
         System.out.print("Digite o CURSO do Aluno: ");
         this.cursoAluno = rd.next();
+        System.out.print("Digite o SEMESTRE do Aluno: ");
+        this.semestreAluno = rd.next();
         System.out.print("Digite a IDADE do Aluno: ");
         this.idadeAluno = rd.nextInt();
         System.out.println("Digite a MÉDIA do Aluno: ");
         System.out.print("Nota 1: ");
-        notasAluno.add(rd.nextInt());
+        notasAluno.add(rd.nextFloat());
         System.out.print("Nota 2: ");
-        notasAluno.add(rd.nextInt());
+        notasAluno.add(rd.nextFloat());
         System.out.print("Nota 3: ");
-        notasAluno.add(rd.nextInt());
+        notasAluno.add(rd.nextFloat());
         this.mediaAluno = notasAluno;
     }
-    public void getFaixaEtariaAluno(){
-
+    public float getFaixaEtariaAluno(){
+        double med = this.mediaAluno.stream()
+        .mapToDouble(m -> m)
+        .sum();
+       return (float) med / this.mediaAluno.size();
     }
     public void Clear(){
         for(int clear = 0; clear < 1000; clear++){ System.out.println("\b");}
