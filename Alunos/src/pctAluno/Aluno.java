@@ -29,8 +29,11 @@ public class Aluno {
     public int getIdadeAluno(){
         return this.idadeAluno;
     }
-    public List<Float> getMediaAluno(){
-        return this.mediaAluno;
+    public float getMediaAluno(){
+       double med = this.mediaAluno.stream()
+       .mapToDouble(m -> m)
+       .sum();
+       return (float) med / this.mediaAluno.size();
     }
     public void setRgmAluno(String rgmAluno){
         this.rgmAluno = rgmAluno;
@@ -60,8 +63,8 @@ public class Aluno {
                 String cursoAluno, 
                 String semestreAluno, 
                 List<Float> mediaAluno){
-        this.rgmAluno 	= rgmAluno;
-        this.nomeAluno 	= nomeAluno;
+        this.rgmAluno       = rgmAluno;
+        this.nomeAluno      = nomeAluno;
         this.idadeAluno     = idadeAluno;
         this.cursoAluno     = cursoAluno;
         this.semestreAluno  = semestreAluno;
@@ -75,14 +78,19 @@ public class Aluno {
     **/
     public Aluno SearchAluno(List<Aluno> obj2, 
                             String rgm, 
-                            String curso){
+                            String tipoPesq){
+        Aluno tmpAluno = obj2.get(0); // First Default
         for (Aluno obj : obj2) {
-                Aluno ln = (Aluno)obj;
-                if(((String)ln.rgmAluno == rgm) || 
-                   ((String)ln.cursoAluno == curso))	
-                                return ln;
+            Aluno ln = (Aluno)obj;
+            if(ln.rgmAluno == rgm){ tmpAluno = ln; break; }
+            // Média
+            tmpAluno =  (tipoPesq == "media" && 
+                        (ln.getMediaAluno() > tmpAluno.getMediaAluno())) ? ln : tmpAluno;
+            // Idade
+            tmpAluno =  (tipoPesq == "idade" && 
+                        (ln.idadeAluno > tmpAluno.idadeAluno)) ? ln : tmpAluno;
         }
-        return this;
+        return tmpAluno;
     }
     public void SearchAluno(List<Aluno> obj2, 
                             String rgm,
@@ -108,7 +116,7 @@ public class Aluno {
                             aln.idadeAluno,
                             aln.cursoAluno,
                             aln.semestreAluno,
-                            aln.getFaixaEtariaAluno());
+                            aln.getMediaAluno());
         System.out.println("\n");
     }
     public void editAluno(boolean novo) {
@@ -134,12 +142,6 @@ public class Aluno {
         System.out.print("Nota 3: ");
         notasAluno.add(rd.nextFloat());
         this.mediaAluno = notasAluno;
-    }
-    public float getFaixaEtariaAluno(){
-        double med = this.mediaAluno.stream()
-        .mapToDouble(m -> m)
-        .sum();
-       return (float) med / this.mediaAluno.size();
     }
     public void Clear(){
         for(int clear = 0; clear < 1000; clear++){ System.out.println("\b");}
