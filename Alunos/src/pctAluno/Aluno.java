@@ -55,9 +55,18 @@ public class Aluno {
         this.mediaAluno = mediaAluno;
     }
     /** 
-    * Constructor 
+    * Constructors
     **/
     public Aluno(){ } // Null
+    /**
+     * 
+     * @param rgmAluno
+     * @param nomeAluno
+     * @param idadeAluno
+     * @param cursoAluno
+     * @param semestreAluno
+     * @param mediaAluno 
+     */
     public Aluno(String rgmAluno, 
                 String nomeAluno, 
                 int idadeAluno, 
@@ -72,11 +81,12 @@ public class Aluno {
         this.mediaAluno     = mediaAluno;
     }
     /**
-    *	Procedures / Methods
-    *   @param  
-    *   @param 
-    *   @param 
-    **/
+     * 
+     * @param obj2
+     * @param rgm
+     * @param tipoPesq
+     * @return 
+     */
     public Aluno SearchAluno(List<Aluno> obj2, 
                             String rgm, 
                             String tipoPesq){
@@ -117,6 +127,12 @@ public class Aluno {
         }
         return tmpAluno;
     }
+    /**
+     * 
+     * @param obj2
+     * @param rgmOuCurso
+     * @param idade 
+     */
     public void SearchAluno(List<Aluno> obj2, 
                             String rgmOuCurso,
                             int idade){
@@ -126,11 +142,14 @@ public class Aluno {
                 (rgmOuCurso != null && rgmOuCurso.toLowerCase().equals(ln.cursoAluno.toLowerCase())) || 
                 (idade == ln.idadeAluno)){
                 ln.error = false;
-                ln.error = false;
                 getDetailAluno(ln);
             }
         }
     }
+    /**
+     * 
+     * @param aln 
+     */
     public void getDetailAluno(Aluno aln){
         if(aln.error) {
             System.out.println("\n>> Ops! =( Algo de errado não está certo! Tente novamente!");
@@ -150,6 +169,10 @@ public class Aluno {
                             aln.semestreAluno,
                             aln.getMediaAluno());
     }
+    /**
+     * 
+     * @param novo 
+     */
     public void editAluno(boolean novo) {
         if(this.error) {
             System.out.println("\n>> Ops! =( Algo de errado não está certo! Tente novamente!");
