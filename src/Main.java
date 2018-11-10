@@ -74,7 +74,7 @@ class Main {
                     __default.Clear();
                     System.out.println(
                     "****************************************************************************************\n" +
-                    "* Oba! Este projeto se encontra no GitHub: github.com/fstack-me/JavaInterdiciplicar\n" +
+                    "* Oba! Este projeto se encontra no GitHub: https://github.com/fstack-me/JavaInter\n" +
                     "****************************************************************************************\n" +
                     "* Desenvolvimento/Participação: \n" +
                     "* >> Programação: Flavio Everton Brito da Silva - 1863036-7\n" +
