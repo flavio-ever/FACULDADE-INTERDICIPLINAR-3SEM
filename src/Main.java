@@ -2,7 +2,7 @@ import java.util.*;
 
 class Main {
   public static void main(String[] args) {
-    Aluno __default         =   new Aluno();
+    Aluno _tmp              =   new Aluno();
     List<Aluno> objAluno    =   new ArrayList<Aluno>();
     Scanner read            =   new Scanner(System.in);
 
@@ -37,30 +37,33 @@ class Main {
                     miniDash = false;
                     break;
                 case 1:
-                    __default.Clear();
-                    __default.editAluno(true);
-                    objAluno.add(__default);
-                    __default.Clear();
+                    _tmp.Clear();
+                    _tmp.setError(false);
+                    objAluno.add(_tmp.editAluno(true, _tmp));
+                    _tmp.Clear();
                     System.out.println(">> Aluno CADASTRADO com sucesso!\n");
                     break;
                 case 2:
-                    __default.Clear();
+                    _tmp.Clear();
+                    _tmp.setError(false);
                     System.out.print(">> Digite o RGM do Aluno para Editar:. ");
-                    __default.SearchAluno(objAluno, read.next(), "_,_", new int[]{}).editAluno(false);
+                    _tmp.editAluno(false, _tmp.SearchAluno(objAluno, read.next(), "_,_", new int[]{}));
                     break;
                 case 3:
-                    __default.Clear();
+                    _tmp.Clear();
                     System.out.print(">> Digite o RGM para pesquisar somente 1 Aluno ou o nome do CURSO pesquisar todos:. ");
-                    __default.SearchAluno(objAluno, read.next(), 0);
+                    _tmp.SearchAluno(objAluno, read.next(), 0);
                     break;
                 case 4:
-                    __default.Clear();
+                    _tmp.Clear();
+                    _tmp.setError(false);
                     System.out.print(">> Para saber a maior média de um determinado curso, digite o nome do curso:. ");
                     String tmpNomeCurso = read.next();
-                    __default.getDetailAluno(__default.SearchAluno(objAluno, null, ("media," + tmpNomeCurso), new int[]{}));
+                                        _tmp.setError(true);
+                    _tmp.getDetailAluno(_tmp.SearchAluno(objAluno, null, ("media," + tmpNomeCurso), new int[]{}));
                     break;
                 case 5:
-                    __default.Clear();
+                    _tmp.Clear();
                     int iIdade, fIdade;
 
                     System.out.print(">> Digite o primeiro intervalo de idade: ");
@@ -68,20 +71,20 @@ class Main {
                     System.out.print(">> Digite o último intervalo de idade: ");
                     fIdade = read.nextInt();
 
-                    __default.SearchAluno(objAluno, null, "idade,null", new int[] {iIdade,fIdade} );
+                    _tmp.SearchAluno(objAluno, null, "idade,null", new int[] {iIdade,fIdade} );
                     break;
                 case 6:
-                    __default.Clear();
+                    _tmp.Clear();
                     System.out.println(
                     "****************************************************************************************\n" +
                     "* Oba! Este projeto se encontra no GitHub: https://github.com/fstack-me/JavaInter\n" +
                     "****************************************************************************************\n" +
-                    "* Desenvolvimento/Participação: \n" +
-                    "* >> Programação: Flavio Everton Brito da Silva - 1863036-7\n" +
-                    "* >> Testes unitários: Lorem ispum...\n" +
-                    "* >> Testes unitários: Lorem ispum...\n" +
-                    "* >> Testes unitários: Lorem ispum...\n" +
-                    "* >> Testes unitários: Lorem ispum...\n");
+                    "* Desenvolvimento, Testes e Participação: \n" +
+                    "* >> Flavio Everton Brito da Silva - RGM: 18630367\n" +
+                    "* >> Joel Adão António Manuel - RGM: 19247702\n" +
+                    "* >> Wellington Jose de Souza - RGM: 18973574\n" +
+                    "* >> Sylvio Luiz de Souza - RGM: 18754252\n" +
+                    "* >> Dafne Rocha Lopes - RGM: 18871445\n");
                     break;
                 default:
                     miniDash = false;

@@ -88,6 +88,7 @@ public class Aluno {
      * @param obj2
      * @param rgm
      * @param tipoPesq
+     * @param faixaIdade
      * @return 
      */
     public Aluno SearchAluno(List<Aluno> obj2, 
@@ -101,11 +102,11 @@ public class Aluno {
         for(Aluno obj : obj2){
             Aluno ln = (Aluno)obj;
             // Rgm
-            if(rgm != null && rgm.equals(ln.getRgmAluno())) { ln.error = false; tmpAluno = ln;  break; }
+            if(rgm != null && rgm.equals(ln.getRgmAluno())) { this.error = false; tmpAluno = ln;  break; }
             /**
              * Verifico se há consistência em algum dos indices p/ liberar a próxima ação
              */
-            if((_tipoPesq[1].toLowerCase().equals(ln.getCursoAluno().toLowerCase()))){ ln.error = false; }
+            if((_tipoPesq[1].toLowerCase().equals(ln.getCursoAluno().toLowerCase()))){ this.error = false; }
              /**
              * Se houver um curso que não seja null, entrão filtrar...
              * Se durante o filtro o curso sugerido for igual ao da lista então re-alocar a variavel tmpAluno
@@ -120,13 +121,13 @@ public class Aluno {
                  _tipoPesq[0].toLowerCase().equals("media") &&
                  _tipoPesq[1].toLowerCase().equals(ln.getCursoAluno().toLowerCase())) && 
                  (ln.getMediaAluno() >= tmpAluno.getMediaAluno())){ //ok
-                ln.error = false;
+                this.error = false;
                 tmpAluno = ln;
             }
             // Faixa etaria
             if((tipoPesq != null && _tipoPesq[0].equals("idade")) && 
                (ln.getIdadeAluno() >= faixaIdade[0] && ln.getIdadeAluno() <= faixaIdade[1] )){
-               ln.error = false;
+               this.error = false;
                getDetailAluno(ln);
             }
         }
@@ -156,17 +157,17 @@ public class Aluno {
      * @param aln 
      */
     public void getDetailAluno(Aluno aln){
-        if(aln.error) {
+        if(this.error) {
             System.out.println("\n>> Ops! =( Algo de errado não está certo! Tente novamente!");
             return;
         }
         System.out.println("--------------------------------------------------------------------");
-        System.out.format(  " - Rgm do Aluno:. %s" + 
-                            "\n - Nome do Aluno:. %s" + 
-                            "\n - Idade do Aluno:. %s" + 
-                            "\n - Curso do Aluno:. %s" + 
-                            "\n - Semestre do Aluno:. %s" + 
-                            "\n - Média do Aluno:. %s\n",	
+        System.out.format(  " >> Rgm do Aluno:. %s" + 
+                            "\n >> Nome do Aluno:. %s" + 
+                            "\n >> Idade do Aluno:. %s" + 
+                            "\n >> Curso do Aluno:. %s" + 
+                            "\n >> Semestre do Aluno:. %s" + 
+                            "\n >> Média do Aluno:. %s\n",	
                             aln.rgmAluno, 
                             aln.nomeAluno, 
                             aln.idadeAluno,
@@ -178,25 +179,37 @@ public class Aluno {
      * 
      * @param novo 
      */
-    public void editAluno(boolean novo) {
-        if(this.error && !novo) {
-            System.out.println("\n>> Ops! =( Algo de errado não está certo! Tente novamente!");
-            return;
-        }
+    public Aluno editAluno(boolean novo, Aluno aln) {
+        Aluno _tmp = new Aluno();
+        
         Scanner rd = new Scanner(System.in);
         List<Float> notasAluno = new ArrayList<Float>();
-        if(novo){ 
-            System.out.print("Digite o RGM do Aluno: ");
-            this.rgmAluno = rd.next();
+        
+        if(this.error) {
+            System.out.println("\n>> Ops! Algo de errado não está certo... Tente novamente!");
+            return this;
+        } 
+        if(novo){
+            System.out.print(">> Digite o RGM do Aluno: ");
+            _tmp.rgmAluno = rd.nextLine();
+        } else { 
+            _tmp = aln;
         }
+        
         System.out.print(">> Digite o NOVO NOME do Aluno: ");
-        this.nomeAluno = rd.next();
+        _tmp.setNomeAluno(rd.nextLine());
+        //System.out.print("");
+        
         System.out.print(">> Digite o NOVO CURSO do Aluno: ");
-        this.cursoAluno = rd.next();
+        _tmp.setCursoAluno(rd.nextLine());
+        //System.out.print("");
+        
         System.out.print(">> Digite o NOVO SEMESTRE do Aluno: ");
-        this.semestreAluno = rd.next();
+        _tmp.setSemestreAluno(rd.nextLine());
+        //System.out.print("");
+        
         System.out.print(">> Digite a NOVA IDADE do Aluno: ");
-        this.idadeAluno = rd.nextInt();
+        _tmp.setIdadeAluno(rd.nextInt());
         System.out.println(">> Digite a NOVA MÉDIA do Aluno: ");
         System.out.print(">> NOVA NOTA 1: ");
         notasAluno.add(rd.nextFloat());
@@ -204,10 +217,12 @@ public class Aluno {
         notasAluno.add(rd.nextFloat());
         System.out.print(">> NOVA NOTA 3: ");
         notasAluno.add(rd.nextFloat());
-        this.mediaAluno = notasAluno;
-        this.error = true;
+        _tmp.setMediaAluno(notasAluno);
+        _tmp.error = true;
+        
+        return _tmp;
     }
     public void Clear(){
-        for(int clear = 0; clear < 1000; clear++){ System.out.println("\b");}
+        for(int clear = 0; clear < 10; clear++){ System.out.println("\b");}
     }
 }
