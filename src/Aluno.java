@@ -223,6 +223,6 @@ public class Aluno {
         return _tmp;
     }
     public void Clear(){
-        for(int clear = 0; clear < 10; clear++){ System.out.println("\b");}
+        for(int clear = 0; clear < 15; clear++){ System.out.println("\b");}
     }
 }
